@@ -32,13 +32,15 @@ export class AccommodationDetailComponent implements OnInit {
   }
 
   onReserve(): void {
-    const isLoggedIn = localStorage.getItem('currentUser');
-    if (!isLoggedIn) {
-      alert('Kérjük, jelentkezzen be a foglaláshoz!');
+    if (!this.accommodation) {
+      alert('Szállás nem található!');
       return;
     }
-    if (this.accommodation) {
-      alert(`Sikeresen lefoglalta a ${this.accommodation.name} szállást!`);
+    const reservationId = this.accommodationService.addReservation(
+      this.accommodation
+    );
+    if (reservationId) {
+      alert(`Sikeresen lefoglalta a ${this.accommodation?.name} szállást!`);
     }
   }
 }

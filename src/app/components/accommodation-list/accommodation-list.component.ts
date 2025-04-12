@@ -1,6 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { AccommodationCardComponent } from '../accommodation-card/accommodation-card.component';
 import { CommonModule } from '@angular/common';
+import { Accommodation } from '../../models/accommodation';
+import { AccommodationService } from '../../services/accommodation.services';
 
 @Component({
   selector: 'app-accommodation-list',
@@ -8,15 +10,20 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./accommodation-list.component.css'],
   imports: [AccommodationCardComponent, CommonModule],
 })
-export class AccommodationListComponent {
+export class AccommodationListComponent implements OnInit {
+  constructor(private accommodationService: AccommodationService) {}
+
+  ngOnInit(): void {}
   @Input() accommodations: any[] = [];
 
   onReserve(event: any) {
-    const isLoggedIn = localStorage.getItem('currentUser');
-    if (!isLoggedIn) {
-      alert('Kérjük, jelentkezzen be a foglaláshoz!');
+    if (!event) {
+      alert('Szállás nem található!');
       return;
     }
-    alert(`Sikeresen lefoglalta a ${event.name} szállást!`);
+    const reservationId = this.accommodationService.addReservation(event);
+    if (reservationId) {
+      alert(`Sikeresen lefoglalta a ${event.name} szállást!`);
+    }
   }
 }

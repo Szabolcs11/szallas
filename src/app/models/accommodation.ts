@@ -24,6 +24,6 @@ export interface Reservation {
   id: number;
   accommodationId: number;
   userId: number;
-  checkIn: Date;
-  checkOut: Date;
+  // checkIn: Date;
+  // checkOut: Date;
 }
