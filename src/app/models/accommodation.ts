@@ -11,31 +11,6 @@ export interface Accommodation {
   reviews: Review[];
 }
 
-// export interface Accommodation {
-//   id: number;
-//   name: string;
-//   location: string;
-//   description: string;
-//   pricePerNight: number;
-//   rating: number;
-//   images: string[];
-//   amenities: string[];
-// }
-
-export interface Reservation {
-  id: number;
-  accommodationId: number;
-  userId: number;
-  checkIn: Date;
-  checkOut: Date;
-}
-
-export interface User {
-  id: number;
-  name: string;
-  email: string;
-}
-
 export interface Review {
   id: number;
   userId: number;
@@ -43,4 +18,12 @@ export interface Review {
   comment: string;
   date: string;
   accommodationId: number;
+}
+
+export interface Reservation {
+  id: number;
+  accommodationId: number;
+  userId: number;
+  checkIn: Date;
+  checkOut: Date;
 }

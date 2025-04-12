@@ -6,6 +6,7 @@ import { SearchBarComponent } from '../../components/search-bar/search-bar.compo
 import { AccommodationListComponent } from '../../components/accommodation-list/accommodation-list.component';
 import { HttpClient } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-home',
@@ -15,6 +16,7 @@ import { FormsModule } from '@angular/forms';
     CommonModule,
     AccommodationListComponent,
     FormsModule,
+    NavbarComponent,
   ],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
