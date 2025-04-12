@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AccommodationCardComponent } from './../../components/accommodation-card/accommodation-card.component';
 import { Accommodation } from './../../models/accommodation';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { AccommodationListComponent } from '../../components/accommodation-list/accommodation-list.component';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-home',
@@ -12,25 +13,22 @@ import { AccommodationListComponent } from '../../components/accommodation-list/
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {
-  accommodations: Accommodation[] = [
-    {
-      id: 1,
-      name: 'Balatoni nyaraló',
-      location: 'Balatonfüred',
-      description: 'Kényelmes nyaraló a Balaton partján.',
-      imageUrl: 'https://placehold.co/300x200',
-      pricePerNight: 25000,
-    },
-    {
-      id: 2,
-      name: 'Pesti apartman',
-      location: 'Budapest',
-      description: 'Modern apartman a belváros szívében.',
-      imageUrl: 'https://placehold.co/300x200',
-      pricePerNight: 30000,
-    },
-  ];
+export class HomeComponent implements OnInit {
+  accommodations: Accommodation[] = [];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.loadAccommodations();
+  }
+
+  loadAccommodations() {
+    this.http
+      .get<Accommodation[]>('placeholderdata/accommodations.json')
+      .subscribe((data) => {
+        this.accommodations = data;
+      });
+  }
 
   onReserve(id: number) {
     console.log(`Lefoglalva szállás ID: ${id}`);

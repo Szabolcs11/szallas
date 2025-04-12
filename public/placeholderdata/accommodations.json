@@ -1,0 +1,42 @@
+[
+    {
+        "id": 1,
+        "name": "Balatoni nyaraló",
+        "location": "Balatonfüred",
+        "description": "Kényelmes nyaraló a Balaton partján.",
+        "imageUrl": "https://placehold.co/300x200",
+        "pricePerNight": 25000
+    },
+    {
+        "id": 2,
+        "name": "Pesti apartman",
+        "location": "Budapest",
+        "description": "Modern apartman a belváros szívében.",
+        "imageUrl": "https://placehold.co/300x200",
+        "pricePerNight": 30000
+    },
+    {
+        "id": 3,
+        "name": "Hegyi menedékház",
+        "location": "Mátra",
+        "description": "Csendes menedékház a hegyekben.",
+        "imageUrl": "https://placehold.co/300x200",
+        "pricePerNight": 20000
+    },
+    {
+        "id": 4,
+        "name": "Tóparti kemping",
+        "location": "Tisza-tó",
+        "description": "Kempingezési lehetőség a tó partján.",
+        "imageUrl": "https://placehold.co/300x200",
+        "pricePerNight": 8000
+    },
+    {
+        "id": 5,
+        "name": "Vidéki ház",
+        "location": "Szentendre",
+        "description": "Hagyományos vidéki ház gyönyörű környezetben.",
+        "imageUrl": "https://placehold.co/300x200",
+        "pricePerNight": 15000
+    }
+]

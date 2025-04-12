@@ -8,3 +8,9 @@ mat-card {
   flex-direction: column;
   height: 100%;
 }
+
+mat-card-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: auto;
+}
