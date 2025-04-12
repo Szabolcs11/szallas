@@ -1,0 +1,8 @@
+<div class="popular-accommodations">
+  <app-accommodation-card
+    *ngFor="let acc of accommodations"
+    [accommodation]="acc"
+    (reserve)="onReserve($event)"
+  >
+  </app-accommodation-card>
+</div>

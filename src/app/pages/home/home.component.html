@@ -4,12 +4,13 @@
 
   <h2>Legnépszerűbb szállások</h2>
   <!-- később ide jönnek a szállás kártyák -->
-  <div class="popular-accommodations">
-    <app-accommodation-card
+  <app-accommodation-list
+    [accommodations]="accommodations"
+  ></app-accommodation-list>
+  <!-- <app-accommodation-card
       *ngFor="let acc of accommodations"
       [accommodation]="acc"
       (reserve)="onReserve($event)"
     >
-    </app-accommodation-card>
-  </div>
+    </app-accommodation-card> -->
 </div>

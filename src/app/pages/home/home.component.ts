@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { AccommodationCardComponent } from './../../components/accommodation-card/accommodation-card.component';
 import { Accommodation } from './../../models/accommodation';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { AccommodationListComponent } from '../../components/accommodation-list/accommodation-list.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [SearchBarComponent, CommonModule, AccommodationCardComponent],
+  imports: [SearchBarComponent, CommonModule, AccommodationListComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
@@ -18,7 +19,7 @@ export class HomeComponent {
       name: 'Balatoni nyaraló',
       location: 'Balatonfüred',
       description: 'Kényelmes nyaraló a Balaton partján.',
-      imageUrl: 'https://via.placeholder.com/300x200',
+      imageUrl: 'https://placehold.co/300x200',
       pricePerNight: 25000,
     },
     {
@@ -26,7 +27,7 @@ export class HomeComponent {
       name: 'Pesti apartman',
       location: 'Budapest',
       description: 'Modern apartman a belváros szívében.',
-      imageUrl: 'https://via.placeholder.com/300x200',
+      imageUrl: 'https://placehold.co/300x200',
       pricePerNight: 30000,
     },
   ];
