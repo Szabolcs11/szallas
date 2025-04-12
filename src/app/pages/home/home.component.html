@@ -1,16 +1,9 @@
 <div class="home">
   <h1>Üdvözlünk a Szálláshely Foglaló Rendszerben!</h1>
-  <app-search-bar></app-search-bar>
+  <app-search-bar (search)="onSearch($event)"></app-search-bar>
 
   <h2>Legnépszerűbb szállások</h2>
-  <!-- később ide jönnek a szállás kártyák -->
   <app-accommodation-list
-    [accommodations]="accommodations"
+    [accommodations]="filteredAccommodations"
   ></app-accommodation-list>
-  <!-- <app-accommodation-card
-      *ngFor="let acc of accommodations"
-      [accommodation]="acc"
-      (reserve)="onReserve($event)"
-    >
-    </app-accommodation-card> -->
 </div>

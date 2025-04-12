@@ -1,5 +1,10 @@
-<form>
-  <input type="text" placeholder="Város, szálláshely..." />
+<form (submit)="onSubmit($event)">
+  <input
+    type="text"
+    placeholder="Város, szálláshely..."
+    [(ngModel)]="searchText"
+    name="searchText"
+  />
   <input type="date" />
   <input type="date" />
   <input type="number" placeholder="Vendégek száma" min="1" />
