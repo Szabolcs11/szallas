@@ -1,0 +1,21 @@
+.container {
+  padding: 1rem;
+}
+
+.images {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+  }
+}
+
+.reserve-button {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}

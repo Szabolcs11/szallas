@@ -1,6 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-accommodation-card',
@@ -12,7 +13,13 @@ export class AccommodationCardComponent {
   @Input() accommodation: any;
   @Output() reserve = new EventEmitter<void>();
 
+  constructor(private router: Router) {}
+
   onReserveClick() {
     this.reserve.emit(this.accommodation);
+  }
+
+  onCardClick() {
+    this.router.navigate(['/accommodation', this.accommodation.id]);
   }
 }

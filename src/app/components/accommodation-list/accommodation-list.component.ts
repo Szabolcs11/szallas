@@ -12,6 +12,6 @@ export class AccommodationListComponent {
   @Input() accommodations: any[] = [];
 
   onReserve(event: any) {
-    console.log('Szállás lefoglalva:', event);
+    alert(`Sikeresen lefoglalta a ${event.name} szállást!`);
   }
 }

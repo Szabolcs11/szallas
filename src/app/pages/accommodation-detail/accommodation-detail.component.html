@@ -1,0 +1,42 @@
+<div *ngIf="loading">Betöltés...</div>
+
+<div *ngIf="!loading && accommodation" class="container">
+  <h1>{{ accommodation.name }}</h1>
+  <p><strong>Helyszín:</strong> {{ accommodation.location }}</p>
+  <p><strong>Leírás:</strong> {{ accommodation.description }}</p>
+  <p>
+    <strong>Ár / éjszaka:</strong>
+    {{ accommodation.pricePerNight | currencyFormat : "HUF" }}
+  </p>
+  <p><strong>Értékelés:</strong> {{ accommodation.rating }} ★</p>
+
+  <h3>Képek</h3>
+  <div class="images">
+    <img
+      *ngFor="let img of accommodation.imageUrls"
+      [src]="img"
+      alt="Szállás kép"
+    />
+  </div>
+
+  <h3>Szolgáltatások</h3>
+  <ul>
+    <li *ngFor="let amenity of accommodation.amenities">{{ amenity }}</li>
+  </ul>
+
+  <div class="reserve-button">
+    <button mat-raised-button color="primary" (click)="onReserve()">
+      Lefoglalás
+    </button>
+  </div>
+
+  <h3>Vélemények</h3>
+  <div *ngFor="let review of accommodation.reviews" class="review-card">
+    <p>{{ review.comment }}</p>
+    <p><strong>Értékelés:</strong> {{ review.rating }} ★</p>
+  </div>
+
+  <div *ngIf="!loading && !accommodation">
+    <p><strong>Nem található ilyen azonosítójú szállás!</strong></p>
+  </div>
+</div>
