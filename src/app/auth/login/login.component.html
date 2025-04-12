@@ -1,0 +1,35 @@
+<div class="login-container">
+  <h2>Bejelentkezés</h2>
+
+  <form (ngSubmit)="login()">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Felhasználónév</mat-label>
+      <input matInput [(ngModel)]="username" name="username" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Jelszó</mat-label>
+      <input
+        matInput
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        required
+      />
+    </mat-form-field>
+
+    <button mat-raised-button color="primary" type="submit" class="full-width">
+      Bejelentkezés
+    </button>
+
+    <p *ngIf="error" class="error-text">{{ error }}</p>
+    <p *ngIf="successMessage" class="success-text">{{ successMessage }}</p>
+  </form>
+
+  <p class="register-link">
+    Még nincs fiókod? <a routerLink="/register">Regisztrálj itt!</a>
+  </p>
+  <p class="register-link">
+    <a routerLink="/">Vissza a főoldalra</a>
+  </p>
+</div>

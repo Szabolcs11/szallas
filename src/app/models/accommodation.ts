@@ -7,7 +7,6 @@ export interface Accommodation {
   imageUrl: string;
 }
 
-// reservation.ts
 export interface Reservation {
   id: number;
   accommodationId: number;
@@ -16,14 +15,12 @@ export interface Reservation {
   checkOut: Date;
 }
 
-// user.ts
 export interface User {
   id: number;
   name: string;
   email: string;
 }
 
-// review.ts
 export interface Review {
   id: number;
   accommodationId: number;

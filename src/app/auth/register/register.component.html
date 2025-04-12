@@ -1,0 +1,50 @@
+<div class="register-container">
+  <h2>Regisztráció</h2>
+
+  <form (ngSubmit)="register()" #form="ngForm">
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Felhasználónév</mat-label>
+      <input matInput [(ngModel)]="username" name="username" required />
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Jelszó</mat-label>
+      <input
+        matInput
+        [(ngModel)]="password"
+        name="password"
+        type="password"
+        required
+        #passwordField="ngModel"
+        minlength="8"
+        [pattern]="passwordPattern"
+      />
+      <mat-error *ngIf="passwordField.errors?.['minlength']">
+        A jelszónak legalább 8 karakter hosszúnak kell lennie.
+      </mat-error>
+      <mat-error *ngIf="passwordField.errors?.['pattern']">
+        A jelszónak tartalmaznia kell kis- és nagybetűt, valamint számot.
+      </mat-error>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      color="accent"
+      type="submit"
+      class="full-width register-button"
+      [disabled]="!form.valid"
+    >
+      Regisztráció
+    </button>
+
+    <div class="error-container">
+      <p *ngIf="error" class="error-text">{{ error }}</p>
+      <p *ngIf="successMessage" class="success-text">{{ successMessage }}</p>
+    </div>
+  </form>
+
+  <p class="login-link">
+    Már van fiókod? <a routerLink="/login">Jelentkezz be itt!</a>
+  </p>
+  <p class="login-link"><a routerLink="/">Vissza a főoldalra</a></p>
+</div>

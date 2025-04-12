@@ -1,0 +1,33 @@
+/* register.component.css */
+.register-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 24px;
+  background-color: #fefefe;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 16px;
+}
+
+.error-text {
+  color: red;
+  margin-top: 8px;
+}
+
+.success-text {
+  color: green;
+  margin-top: 8px;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.register-button {
+  margin-top: 32px;
+}
