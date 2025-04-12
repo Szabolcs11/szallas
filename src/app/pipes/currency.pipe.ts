@@ -6,6 +6,10 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class CurrencyPipe implements PipeTransform {
   transform(value: number, currencyCode: string = 'HUF'): string {
     if (!value) return '';
-    return `${currencyCode} ${value.toFixed(2)}`;
+    const formattedNumber = value.toLocaleString('hu-HU', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    });
+    return `${currencyCode} ${formattedNumber}`;
   }
 }

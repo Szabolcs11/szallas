@@ -9,7 +9,10 @@
   <mat-card-content>
     <p>{{ accommodation.description }}</p>
     <p>
-      <strong>{{ accommodation.pricePerNight }}</strong> / éj
+      <strong>{{
+        accommodation.pricePerNight | currencyFormat : "HUF"
+      }}</strong>
+      / éj
     </p>
   </mat-card-content>
   <mat-card-actions>

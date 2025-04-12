@@ -12,6 +12,11 @@ export class AccommodationListComponent {
   @Input() accommodations: any[] = [];
 
   onReserve(event: any) {
+    const isLoggedIn = localStorage.getItem('currentUser');
+    if (!isLoggedIn) {
+      alert('Kérjük, jelentkezzen be a foglaláshoz!');
+      return;
+    }
     alert(`Sikeresen lefoglalta a ${event.name} szállást!`);
   }
 }

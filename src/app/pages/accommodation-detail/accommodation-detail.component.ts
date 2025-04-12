@@ -32,8 +32,7 @@ export class AccommodationDetailComponent implements OnInit {
   }
 
   onReserve(): void {
-    //check if user is logged in
-    const isLoggedIn = localStorage.getItem('isLoggedIn');
+    const isLoggedIn = localStorage.getItem('currentUser');
     if (!isLoggedIn) {
       alert('Kérjük, jelentkezzen be a foglaláshoz!');
       return;
