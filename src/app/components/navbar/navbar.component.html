@@ -1,12 +1,14 @@
-<nav class="navbar">
-  <a routerLink="/">Home</a>
+<mat-nav-list class="navbar">
+  <a mat-list-item routerLink="/"> <mat-icon>home</mat-icon>Home</a>
 
   <ng-container *ngIf="!isLoggedIn; else loggedInBlock">
-    <a routerLink="/login">Login</a>
-    <a routerLink="/register">Register</a>
+    <a mat-list-item routerLink="/login">Login</a>
+    <a mat-list-item routerLink="/register">Register</a>
   </ng-container>
 
   <ng-template #loggedInBlock>
-    <button (click)="logout()">Logout</button>
+    <button mat-list-item (click)="logout()">
+      <mat-icon>key</mat-icon>Logout
+    </button>
   </ng-template>
-</nav>
+</mat-nav-list>

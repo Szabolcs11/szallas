@@ -15,3 +15,9 @@ mat-card-actions {
   justify-content: center;
   margin-top: auto;
 }
+
+@media screen and (max-width: 600px) {
+  .accommodation-card {
+    max-width: 100%;
+  }
+}

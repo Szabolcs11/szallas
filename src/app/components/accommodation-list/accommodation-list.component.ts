@@ -3,6 +3,7 @@ import { AccommodationCardComponent } from '../accommodation-card/accommodation-
 import { CommonModule } from '@angular/common';
 import { Accommodation } from '../../models/accommodation';
 import { AccommodationService } from '../../services/accommodation.services';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-accommodation-list',
@@ -11,19 +12,34 @@ import { AccommodationService } from '../../services/accommodation.services';
   imports: [AccommodationCardComponent, CommonModule],
 })
 export class AccommodationListComponent implements OnInit {
-  constructor(private accommodationService: AccommodationService) {}
+  constructor(
+    private accommodationService: AccommodationService,
+    private snackBar: MatSnackBar
+  ) {}
 
   ngOnInit(): void {}
   @Input() accommodations: any[] = [];
 
   onReserve(event: any) {
     if (!event) {
-      alert('Szállás nem található!');
+      this.snackBar.open('Szállás nem található!', 'Bezárás', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      });
       return;
     }
     const reservationId = this.accommodationService.addReservation(event);
     if (reservationId) {
-      alert(`Sikeresen lefoglalta a ${event.name} szállást!`);
+      this.snackBar.open(
+        `Sikeresen lefoglalta a(z) ${event.name} szállást!`,
+        'Bezárás',
+        {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        }
+      );
     }
   }
 }

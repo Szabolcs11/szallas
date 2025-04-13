@@ -1,12 +1,11 @@
-import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { AccommodationCardComponent } from './../../components/accommodation-card/accommodation-card.component';
-import { Accommodation } from './../../models/accommodation';
-import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
-import { AccommodationListComponent } from '../../components/accommodation-list/accommodation-list.component';
 import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { AccommodationListComponent } from '../../components/accommodation-list/accommodation-list.component';
 import { NavbarComponent } from '../../components/navbar/navbar.component';
+import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
+import { Accommodation } from './../../models/accommodation';
 
 @Component({
   selector: 'app-home',
