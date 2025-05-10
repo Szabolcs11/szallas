@@ -7,6 +7,9 @@
   </ng-container>
 
   <ng-template #loggedInBlock>
+    <a mat-list-item routerLink="/profile">
+      <mat-icon>account_circle</mat-icon>Profile</a
+    >
     <button mat-list-item (click)="logout()">
       <mat-icon>key</mat-icon>Logout
     </button>

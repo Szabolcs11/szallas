@@ -31,6 +31,10 @@ export class AuthService {
     return false;
   }
 
+  isLoggedIn(): boolean {
+    return localStorage.getItem(this.currentUserKey) !== null;
+  }
+
   logout() {
     localStorage.removeItem(this.currentUserKey);
   }

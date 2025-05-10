@@ -4,6 +4,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { AccommodationDetailComponent } from './pages/accommodation-detail/accommodation-detail.component';
 import { LoginRegisterGuard } from './services/auth.guard';
+import { ProfileComponent } from './pages/profile/profile.component';
+import { AuthGuard } from './services/authentication.guard';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -18,4 +20,5 @@ export const routes: Routes = [
     canActivate: [LoginRegisterGuard],
   },
   { path: 'accommodation/:id', component: AccommodationDetailComponent },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
 ];
