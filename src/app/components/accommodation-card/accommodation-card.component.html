@@ -4,14 +4,12 @@
     [src]="accommodation.imageUrl"
     alt="{{ accommodation.name }}"
   />
-  <mat-card-title>{{ accommodation.name }}</mat-card-title>
+  <mat-card-title>{{ accommodation.title }}</mat-card-title>
   <mat-card-subtitle>{{ accommodation.location }}</mat-card-subtitle>
   <mat-card-content>
     <p>{{ accommodation.description }}</p>
     <p>
-      <strong>{{
-        accommodation.pricePerNight | currencyFormat : "HUF"
-      }}</strong>
+      <strong>{{ accommodation.price | currencyFormat : "HUF" }}</strong>
       / éj
     </p>
   </mat-card-content>

@@ -6,6 +6,7 @@ import { AccommodationListComponent } from '../../components/accommodation-list/
 import { NavbarComponent } from '../../components/navbar/navbar.component';
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component';
 import { Accommodation } from './../../models/accommodation';
+import { AccommodationService } from '../../services/accommodation.services';
 
 @Component({
   selector: 'app-home',
@@ -24,19 +25,20 @@ export class HomeComponent implements OnInit {
   accommodations: Accommodation[] = [];
   filteredAccommodations: Accommodation[] = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private accommodationService: AccommodationService
+  ) {}
 
   ngOnInit() {
     this.loadAccommodations();
   }
 
   loadAccommodations() {
-    this.http
-      .get<Accommodation[]>('placeholderdata/accommodations.json')
-      .subscribe((data) => {
-        this.accommodations = data;
-        this.filteredAccommodations = data;
-      });
+    this.accommodationService.getAccommodations().subscribe((data) => {
+      this.accommodations = data;
+      this.filteredAccommodations = data;
+    });
   }
 
   onSearch(query: string) {

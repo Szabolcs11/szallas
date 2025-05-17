@@ -16,7 +16,8 @@ import { MatRippleModule } from '@angular/material/core';
   imports: [CommonModule, CurrencyPipe, MatButtonModule, MatRippleModule],
 })
 export class AccommodationDetailComponent implements OnInit {
-  accommodation: Accommodation | undefined;
+  // accommodation: Accommodation | undefined;
+  accommodation: any | undefined;
   loading = true;
 
   constructor(
@@ -26,10 +27,18 @@ export class AccommodationDetailComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const id = Number(this.route.snapshot.paramMap.get('id'));
+    const id = this.route.snapshot.paramMap.get('id') as string;
 
-    this.accommodationService.getAccommodations().subscribe((data) => {
-      this.accommodation = data.find((a) => a.id === id);
+    this.accommodationService.getAccommodationById(id).subscribe((data) => {
+      if (data) {
+        this.accommodation = data;
+      } else {
+        this.snackBar.open('Szállás nem található!', 'Bezárás', {
+          duration: 3000,
+          horizontalPosition: 'center',
+          verticalPosition: 'bottom',
+        });
+      }
       this.loading = false;
     });
   }

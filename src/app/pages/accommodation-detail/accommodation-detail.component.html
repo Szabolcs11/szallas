@@ -1,17 +1,18 @@
 <div *ngIf="loading">Betöltés...</div>
 
 <div *ngIf="!loading && accommodation" class="container">
-  <h1>{{ accommodation.name }}</h1>
+  <h1>{{ accommodation.title }}</h1>
   <p><strong>Helyszín:</strong> {{ accommodation.location }}</p>
   <p><strong>Leírás:</strong> {{ accommodation.description }}</p>
   <p>
     <strong>Ár / éjszaka:</strong>
-    {{ accommodation.pricePerNight | currencyFormat : "HUF" }}
+    {{ accommodation.price | currencyFormat : "HUF" }}
   </p>
   <p><strong>Értékelés:</strong> {{ accommodation.rating }} ★</p>
 
   <h3>Képek</h3>
   <div class="images">
+    <img alt="Szállás kép" src="https://placehold.co/300x200" />
     <img
       *ngFor="let img of accommodation.imageUrls"
       [src]="img"

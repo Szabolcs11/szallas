@@ -1,8 +1,15 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
+import { from, map, Observable } from 'rxjs';
 import { Accommodation, Reservation } from './../models/accommodation';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import {
+  collection,
+  collectionData,
+  doc,
+  Firestore,
+  getDoc,
+} from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -11,10 +18,31 @@ export class AccommodationService {
   private jsonUrl = 'placeholderdata/accommodations.json';
   private reservations: Reservation[] = [];
 
-  constructor(private http: HttpClient, private snackBar: MatSnackBar) {}
+  constructor(
+    private http: HttpClient,
+    private snackBar: MatSnackBar,
+    private firestore: Firestore
+  ) {}
 
   getAccommodations(): Observable<Accommodation[]> {
-    return this.http.get<Accommodation[]>(this.jsonUrl);
+    const itemCollection = collection(this.firestore, 'accommodation');
+    const item = collectionData<any>(itemCollection, {
+      idField: 'id',
+    });
+    return item;
+  }
+
+  getAccommodationById(id: string): Observable<Accommodation | undefined> {
+    const itemDocRef = doc(this.firestore, 'accommodation', id);
+    return from(getDoc(itemDocRef)).pipe(
+      map((docSnapshot) => {
+        if (docSnapshot.exists()) {
+          return { id: docSnapshot.id, ...docSnapshot.data() } as any;
+        } else {
+          return undefined;
+        }
+      })
+    );
   }
 
   addReservation(accommodation: Accommodation): number {
