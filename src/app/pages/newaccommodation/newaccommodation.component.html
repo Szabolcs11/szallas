@@ -1,0 +1,98 @@
+<mat-card>
+  <mat-card-title>New Accommodation</mat-card-title>
+
+  <form [formGroup]="accommodationForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input
+        matInput
+        formControlName="title"
+        placeholder="Accommodation title"
+      />
+      <mat-error *ngIf="accommodationForm.get('title')?.hasError('required')">
+        Title is required.
+      </mat-error>
+      <mat-error *ngIf="accommodationForm.get('title')?.hasError('minlength')">
+        Title must be at least 3 characters long.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Price</mat-label>
+      <input
+        matInput
+        formControlName="price"
+        type="number"
+        placeholder="Price per night"
+      />
+      <mat-error *ngIf="accommodationForm.get('price')?.hasError('required')">
+        Price is required.
+      </mat-error>
+      <mat-error *ngIf="accommodationForm.get('price')?.hasError('min')">
+        Price must be a positive number.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Location</mat-label>
+      <input matInput formControlName="location" placeholder="Location" />
+      <mat-error
+        *ngIf="accommodationForm.get('location')?.hasError('required')"
+      >
+        Location is required.
+      </mat-error>
+      <mat-error
+        *ngIf="accommodationForm.get('location')?.hasError('minlength')"
+      >
+        Location must be at least 3 characters long.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        formControlName="description"
+        placeholder="Description"
+        rows="5"
+      ></textarea>
+      <mat-error
+        *ngIf="accommodationForm.get('description')?.hasError('required')"
+      >
+        Description is required.
+      </mat-error>
+      <mat-error
+        *ngIf="accommodationForm.get('description')?.hasError('minlength')"
+      >
+        Description must be at least 10 characters long.
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Amenities</mat-label>
+      <mat-select formControlName="amenities" multiple>
+        <mat-option
+          *ngFor="let amenity of amenitiesOptions"
+          [value]="amenity"
+          >{{ amenity }}</mat-option
+        >
+      </mat-select>
+      <mat-error
+        *ngIf="accommodationForm.get('amenities')?.hasError('required')"
+      >
+        At least one amenity is required.
+      </mat-error>
+    </mat-form-field>
+
+    <div class="form-actions">
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="accommodationForm.invalid"
+      >
+        Submit
+      </button>
+    </div>
+  </form>
+</mat-card>

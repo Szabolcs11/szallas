@@ -6,6 +6,7 @@ import { AccommodationDetailComponent } from './pages/accommodation-detail/accom
 import { LoginRegisterGuard } from './services/auth.guard';
 import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuard } from './services/authentication.guard';
+import { NewAccommodationComponent } from './pages/newaccommodation/newaccommodation.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -21,4 +22,9 @@ export const routes: Routes = [
   },
   { path: 'accommodation/:id', component: AccommodationDetailComponent },
   { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  {
+    path: 'createaccommodation',
+    component: NewAccommodationComponent,
+    canActivate: [AuthGuard],
+  },
 ];

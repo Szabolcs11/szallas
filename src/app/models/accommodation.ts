@@ -1,14 +1,15 @@
 export interface Accommodation {
-  id: number;
-  name: string;
+  id?: number;
+  title: string;
   description: string;
   location: string;
-  pricePerNight: number;
-  imageUrl: string;
-  imageUrls: string[];
+  price: number;
   rating: number;
   amenities: string[];
-  reviews: Review[];
+  userId: number;
+  // imageUrls: string[];
+  // imageUrl: string;
+  // reviews: Review[];
 }
 
 export interface Review {

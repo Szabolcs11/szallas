@@ -13,6 +13,7 @@ import {
   where,
   query,
   orderBy,
+  addDoc,
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -67,6 +68,43 @@ export class AccommodationService {
     );
   }
 
+  createAccommodation(accommodation: Accommodation): Promise<any> {
+    if (!accommodation) {
+      this.snackBar.open('Szállás nem található!', 'Bezárás', {
+        duration: 3000,
+        horizontalPosition: 'center',
+        verticalPosition: 'bottom',
+      });
+      return Promise.resolve(false);
+    }
+    const itemCollection = collection(this.firestore, 'accommodation');
+    return from(addDoc(itemCollection, accommodation))
+      .pipe(
+        map((docRef) => {
+          if (docRef.id) {
+            this.snackBar.open('Szállás sikeresen létrehozva!', 'Bezárás', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+            });
+            return true;
+          } else {
+            this.snackBar.open(
+              'Hiba történt a szállás létrehozásakor!',
+              'Bezárás',
+              {
+                duration: 3000,
+                horizontalPosition: 'center',
+                verticalPosition: 'bottom',
+              }
+            );
+            return false;
+          }
+        })
+      )
+      .toPromise();
+  }
+
   addReservation(accommodation: Accommodation): number {
     if (!accommodation) {
       this.snackBar.open('Szállás nem található!', 'Bezárás', {
@@ -101,7 +139,7 @@ export class AccommodationService {
     const userId = parsedUser.id;
     const reservation: Reservation = {
       id: this.reservations.length + 1,
-      accommodationId: accommodation.id,
+      accommodationId: accommodation.id!,
       userId: userId,
     };
     this.reservations.push(reservation);
