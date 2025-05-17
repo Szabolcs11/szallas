@@ -1,34 +1,53 @@
 import { Injectable } from '@angular/core';
 import { User } from './../models/user';
+import { getAuth } from '@angular/fire/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from '@firebase/auth';
+import { FirebaseApp } from '@angular/fire/app';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private usersKey = 'users';
   private currentUserKey = 'currentUser';
 
-  constructor() {}
+  constructor(fireBaseApp: FirebaseApp) {}
 
-  register(user: User): boolean {
-    const users = this.getUsers();
-    const exists = users.find((u) => u.username === user.username);
-    if (exists) return false;
+  async register(user: User): Promise<boolean> {
+    const { email, password } = user;
+    const auth = getAuth();
 
-    user.id = Date.now();
-    users.push(user);
-    localStorage.setItem(this.usersKey, JSON.stringify(users));
-    return true;
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log('User registered:', user);
+      localStorage.setItem(this.currentUserKey, JSON.stringify(user)); // Store user info in localStorage
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
-  login(username: string, password: string): boolean {
-    const users = this.getUsers();
-    const found = users.find(
-      (u) => u.username === username && u.password === password
-    );
-    if (found) {
-      localStorage.setItem(this.currentUserKey, JSON.stringify(found));
+  async login(email: string, password: string): Promise<boolean> {
+    const auth = getAuth();
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
+      const user = userCredential.user;
+      console.log('User logged in:', user);
+      localStorage.setItem(this.currentUserKey, JSON.stringify(user)); // Store user info in localStorage
       return true;
+    } catch (error) {
+      return false;
     }
-    return false;
   }
 
   isLoggedIn(): boolean {
@@ -37,6 +56,10 @@ export class AuthService {
 
   logout() {
     localStorage.removeItem(this.currentUserKey);
+    const auth = getAuth();
+    auth.signOut().then(() => {
+      console.log('User logged out');
+    });
   }
 
   private getUsers(): User[] {

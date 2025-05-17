@@ -21,15 +21,15 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class LoginComponent {
-  username = '';
+  email = '';
   password = '';
   error = '';
   successMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  login() {
-    const success = this.authService.login(this.username, this.password);
+  async login() {
+    const success = await this.authService.login(this.email, this.password);
     if (success) {
       this.error = '';
       this.successMessage = 'Sikeres bejelentkezés!';

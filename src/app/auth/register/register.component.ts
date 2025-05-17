@@ -22,7 +22,7 @@ import { CommonModule } from '@angular/common';
   ],
 })
 export class RegisterComponent {
-  username = '';
+  email = '';
   password = '';
   error = '';
   successMessage = '';
@@ -32,21 +32,21 @@ export class RegisterComponent {
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  register() {
+  async register() {
     const user: User = {
       id: 0,
-      username: this.username,
+      email: this.email,
       password: this.password,
     };
 
-    const success = this.authService.register(user);
+    const success = await this.authService.register(user);
     if (success) {
-      this.successMessage = 'Sikeres regisztráció! Kérjük, jelentkezzen be.';
+      this.successMessage = 'Sikeres regisztráció!';
       this.error = '';
       setTimeout(() => this.router.navigate(['/login']), 2000);
     } else {
       this.successMessage = '';
-      this.error = 'Ez a felhasználónév már foglalt.';
+      this.error = 'Ez az email már foglalt.';
     }
   }
 }
