@@ -15,9 +15,7 @@ export class SearchBarComponent {
   @Output() search = new EventEmitter<string>();
 
   onSubmit(event: Event) {
-    console.log('Form submitted:', this.searchText);
-
     event.preventDefault();
-    this.search.emit(this.searchText.trim().toLowerCase());
+    this.search.emit(this.searchText.trim());
   }
 }

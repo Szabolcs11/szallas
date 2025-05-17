@@ -46,10 +46,11 @@ export class HomeComponent implements OnInit {
       this.filteredAccommodations = this.accommodations;
       return;
     }
-
-    this.filteredAccommodations = this.accommodations.filter((acc) =>
-      acc.location.toLowerCase().includes(query)
-    );
+    this.accommodationService
+      .getAccommodationsByLocation(query)
+      .subscribe((data) => {
+        this.filteredAccommodations = data;
+      });
   }
 
   onReserve(id: number) {

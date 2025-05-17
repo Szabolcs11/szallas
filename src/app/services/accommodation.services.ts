@@ -9,6 +9,10 @@ import {
   doc,
   Firestore,
   getDoc,
+  getDocs,
+  where,
+  query,
+  orderBy,
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -41,6 +45,24 @@ export class AccommodationService {
         } else {
           return undefined;
         }
+      })
+    );
+  }
+
+  getAccommodationsByLocation(location: string): Observable<Accommodation[]> {
+    const itemCollection = collection(this.firestore, 'accommodation');
+    const q = query(
+      itemCollection,
+      where('location', '==', location),
+      orderBy('title', 'asc')
+    );
+    return from(getDocs(q)).pipe(
+      map((querySnapshot) => {
+        const accommodations: Accommodation[] = [];
+        querySnapshot.forEach((doc) => {
+          accommodations.push({ id: doc.id, ...doc.data() } as any);
+        });
+        return accommodations;
       })
     );
   }
