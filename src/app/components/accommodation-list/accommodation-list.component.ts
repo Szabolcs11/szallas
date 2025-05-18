@@ -1,7 +1,6 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AccommodationCardComponent } from '../accommodation-card/accommodation-card.component';
 import { CommonModule } from '@angular/common';
-import { Accommodation } from '../../models/accommodation';
 import { AccommodationService } from '../../services/accommodation.services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -19,6 +18,7 @@ export class AccommodationListComponent implements OnInit {
 
   ngOnInit(): void {}
   @Input() accommodations: any[] = [];
+  @Output() accommodationSelected = new EventEmitter<number>();
 
   onReserve(event: any) {
     if (!event) {
@@ -32,7 +32,7 @@ export class AccommodationListComponent implements OnInit {
     const reservationId = this.accommodationService.addReservation(event);
     if (reservationId) {
       this.snackBar.open(
-        `Sikeresen lefoglalta a(z) ${event.name} szállást!`,
+        `Sikeresen lefoglalta a(z) ${event.title} szállást!`,
         'Bezárás',
         {
           duration: 3000,

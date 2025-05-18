@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { from, map, Observable } from 'rxjs';
+import { from, map, Observable, switchMap } from 'rxjs';
 import { Accommodation, Reservation } from './../models/accommodation';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import {
@@ -14,6 +14,8 @@ import {
   query,
   orderBy,
   addDoc,
+  deleteDoc,
+  updateDoc,
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -105,6 +107,82 @@ export class AccommodationService {
       .toPromise();
   }
 
+  getUserAccommodations(userId: string): Observable<Accommodation[]> {
+    const itemCollection = collection(this.firestore, 'accommodation');
+    console.log('User ID:', userId);
+    const q = query(
+      itemCollection,
+      where('userId', '==', userId),
+      orderBy('title', 'asc')
+    );
+    return from(getDocs(q)).pipe(
+      map((querySnapshot) => {
+        const accommodations: Accommodation[] = [];
+        querySnapshot.forEach((doc) => {
+          let data = doc.data();
+          data['id'] = doc.id;
+          accommodations.push(data as any);
+        });
+        return accommodations;
+      })
+    );
+  }
+
+  deleteAccommodation(id: string): Promise<void> {
+    const itemDocRef = doc(this.firestore, 'accommodation', id);
+    return from(getDoc(itemDocRef))
+      .pipe(
+        map((docSnapshot) => {
+          if (docSnapshot.exists()) {
+            return deleteDoc(itemDocRef);
+          } else {
+            this.snackBar.open('Szállás nem található!', 'Bezárás', {
+              duration: 3000,
+              horizontalPosition: 'center',
+              verticalPosition: 'bottom',
+            });
+            return Promise.resolve();
+          }
+        }),
+        switchMap((deleteOperation) => from(deleteOperation))
+      )
+      .toPromise();
+  }
+
+  updateAccommodation(id: string, accommodation: Accommodation): Promise<void> {
+    const itemDocRef = doc(this.firestore, 'accommodation', id);
+    return from(
+      updateDoc(itemDocRef, {
+        title: accommodation.title,
+        location: accommodation.location,
+        price: accommodation.price,
+        description: accommodation.description,
+      })
+    )
+      .pipe(
+        map(() => {
+          this.snackBar.open('Szállás sikeresen frissítve!', 'Bezárás', {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+          });
+          // return true;
+        })
+      )
+      .toPromise()
+      .catch((error) => {
+        this.snackBar.open(
+          'Error updating accommodation. Please try again.',
+          'Close',
+          {
+            duration: 3000,
+            horizontalPosition: 'center',
+            verticalPosition: 'bottom',
+          }
+        );
+      });
+  }
+
   addReservation(accommodation: Accommodation): number {
     if (!accommodation) {
       this.snackBar.open('Szállás nem található!', 'Bezárás', {
@@ -139,7 +217,7 @@ export class AccommodationService {
     const userId = parsedUser.id;
     const reservation: Reservation = {
       id: this.reservations.length + 1,
-      accommodationId: accommodation.id!,
+      accommodationId: accommodation.id as unknown as number,
       userId: userId,
     };
     this.reservations.push(reservation);

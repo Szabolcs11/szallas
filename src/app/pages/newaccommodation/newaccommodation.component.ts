@@ -75,6 +75,7 @@ export class NewAccommodationComponent {
         location: this.accommodationForm.value.location,
         description: this.accommodationForm.value.description,
         amenities: this.accommodationForm.value.amenities,
+        createdAt: new Date(),
         rating: 5,
         userId: userId,
       };

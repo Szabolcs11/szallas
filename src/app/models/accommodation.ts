@@ -1,5 +1,5 @@
 export interface Accommodation {
-  id?: number;
+  id?: string;
   title: string;
   description: string;
   location: string;
@@ -7,6 +7,7 @@ export interface Accommodation {
   rating: number;
   amenities: string[];
   userId: number;
+  createdAt: Date;
   // imageUrls: string[];
   // imageUrl: string;
   // reviews: Review[];

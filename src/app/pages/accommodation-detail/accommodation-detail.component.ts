@@ -7,13 +7,20 @@ import { Accommodation } from './../../models/accommodation';
 import { AccommodationService } from './../../services/accommodation.services';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatRippleModule } from '@angular/material/core';
+import { HungarianDatePipe } from '../../pipes/hungarian-date.pipe';
 
 @Component({
   selector: 'app-accommodation-detail',
   templateUrl: './accommodation-detail.component.html',
   styleUrls: ['./accommodation-detail.component.css'],
   standalone: true,
-  imports: [CommonModule, CurrencyPipe, MatButtonModule, MatRippleModule],
+  imports: [
+    CommonModule,
+    CurrencyPipe,
+    MatButtonModule,
+    MatRippleModule,
+    HungarianDatePipe,
+  ],
 })
 export class AccommodationDetailComponent implements OnInit {
   // accommodation: Accommodation | undefined;
@@ -32,6 +39,7 @@ export class AccommodationDetailComponent implements OnInit {
     this.accommodationService.getAccommodationById(id).subscribe((data) => {
       if (data) {
         this.accommodation = data;
+        console.log(data);
       } else {
         this.snackBar.open('Szállás nem található!', 'Bezárás', {
           duration: 3000,
@@ -57,7 +65,7 @@ export class AccommodationDetailComponent implements OnInit {
     );
     if (reservationId) {
       this.snackBar.open(
-        `Sikeresen lefoglalta a(z) ${this.accommodation?.name} szállást!`,
+        `Sikeresen lefoglalta a(z) ${this.accommodation?.title} szállást!`,
         'Bezárás',
         {
           duration: 3000,
