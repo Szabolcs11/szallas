@@ -32,11 +32,14 @@ export class AccommodationService {
   ) {}
 
   getAccommodations(): Observable<Accommodation[]> {
-    const itemCollection = collection(this.firestore, 'accommodation');
-    const item = collectionData<any>(itemCollection, {
+    const itemCollection = query(
+      collection(this.firestore, 'accommodation'),
+      orderBy('createdAt', 'desc')
+    );
+
+    return collectionData<Accommodation>(itemCollection as any, {
       idField: 'id',
     });
-    return item;
   }
 
   getAccommodationById(id: string): Observable<Accommodation | undefined> {
