@@ -60,13 +60,11 @@ export class NewAccommodationComponent {
 
   async onSubmit(): Promise<void> {
     if (this.accommodationForm.valid) {
-      console.log('Form Submitted!', this.accommodationForm.value);
       const myuser = localStorage.getItem('currentUser');
       let userId = 0;
       if (myuser) {
         const user = JSON.parse(myuser);
         userId = user.uid;
-        console.log(user);
       } else {
         return;
       }

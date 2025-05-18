@@ -25,8 +25,7 @@ export class AuthService {
         password
       );
       const user = userCredential.user;
-      console.log('User registered:', user);
-      localStorage.setItem(this.currentUserKey, JSON.stringify(user)); // Store user info in localStorage
+      localStorage.setItem(this.currentUserKey, JSON.stringify(user));
       return true;
     } catch (error) {
       return false;
@@ -42,7 +41,6 @@ export class AuthService {
         password
       );
       const user = userCredential.user;
-      console.log('User logged in:', user);
       localStorage.setItem(this.currentUserKey, JSON.stringify(user)); // Store user info in localStorage
       return true;
     } catch (error) {

@@ -1,20 +1,20 @@
 <mat-nav-list class="navbar">
-  <a mat-list-item routerLink="/"> <mat-icon>home</mat-icon>Home</a>
+  <a mat-list-item routerLink="/"> <mat-icon>home</mat-icon>Főoldal</a>
 
   <ng-container *ngIf="!isLoggedIn; else loggedInBlock">
-    <a mat-list-item routerLink="/login">Login</a>
-    <a mat-list-item routerLink="/register">Register</a>
+    <a mat-list-item routerLink="/login">Bejelentkezés</a>
+    <a mat-list-item routerLink="/register">Regisztráció</a>
   </ng-container>
 
   <ng-template #loggedInBlock>
     <a mat-list-item routerLink="/profile">
-      <mat-icon>account_circle</mat-icon>Profile</a
+      <mat-icon>account_circle</mat-icon>Profil</a
     >
     <a mat-list-item routerLink="/createaccommodation">
-      <mat-icon>add_circle</mat-icon>New accommodation</a
+      <mat-icon>add_circle</mat-icon>Szállás hozzáadása</a
     >
     <button mat-list-item (click)="logout()">
-      <mat-icon>key</mat-icon>Logout
+      <mat-icon>key</mat-icon>Kijelentkezés
     </button>
   </ng-template>
 </mat-nav-list>

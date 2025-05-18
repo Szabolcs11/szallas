@@ -57,12 +57,10 @@ export class ProfileComponent implements OnInit {
 
     if (user) {
       const parsedUser = JSON.parse(user);
-      console.log(parsedUser);
       this.email = parsedUser.email;
 
       this.accommodationService.getUserAccommodations(parsedUser.uid).subscribe(
         (data) => {
-          console.log('Fetched accommodations:', data);
           this.accommodations = data;
           this.loading = false;
         },
@@ -75,21 +73,10 @@ export class ProfileComponent implements OnInit {
   }
 
   openEditDialog(accommodation: Accommodation) {
-    console.log('edit');
-    // const dialogRef = this.dialog.open(EditAccommodationComponent, {
-    //   data: accommodation,
-    // });
-    // dialogRef.afterClosed().subscribe((result) => {
-    //   if (result) {
-    //     this.accommodationService.updateAccommodation(accommodation.id, result);
-    //   }
-    // });
-
     const dialogRef = this.dialog.open(EditAccommodationComponent, {
       data: accommodation,
     });
     dialogRef.afterClosed().subscribe((result) => {
-      console.log('Dialog closed with result:', result);
       if (result) {
         this.accommodationService.updateAccommodation(
           accommodation.id!,
@@ -100,9 +87,7 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  // Delete accommodation
   deleteAccommodation(accommodationId: string) {
-    console.log('delete', accommodationId);
     if (confirm('Are you sure you want to delete this accommodation?')) {
       this.accommodationService
         .deleteAccommodation(accommodationId)

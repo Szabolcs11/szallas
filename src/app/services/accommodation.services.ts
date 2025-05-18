@@ -135,7 +135,6 @@ export class AccommodationService {
 
   getUserAccommodations(userId: string): Observable<Accommodation[]> {
     const itemCollection = collection(this.firestore, 'accommodation');
-    console.log('User ID:', userId);
     const q = query(
       itemCollection,
       where('userId', '==', userId),

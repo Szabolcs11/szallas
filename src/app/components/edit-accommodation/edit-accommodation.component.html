@@ -1,13 +1,13 @@
-<h2 mat-dialog-title>Edit Accommodation</h2>
+<h2 mat-dialog-title>Szállás módosítása</h2>
 <mat-dialog-content>
   <form>
     <mat-form-field appearance="fill">
-      <mat-label>Title</mat-label>
+      <mat-label>Cím</mat-label>
       <input matInput [(ngModel)]="accommodation.title" name="title" required />
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Location</mat-label>
+      <mat-label>Lokáció</mat-label>
       <input
         matInput
         [(ngModel)]="accommodation.location"
@@ -17,7 +17,7 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Price</mat-label>
+      <mat-label>Ár (/éjszaka)</mat-label>
       <input
         matInput
         [(ngModel)]="accommodation.price"
@@ -30,6 +30,6 @@
 </mat-dialog-content>
 
 <mat-dialog-actions>
-  <button mat-button (click)="onCancel()">Cancel</button>
-  <button mat-button color="primary" (click)="onSave()">Save</button>
+  <button mat-button (click)="onCancel()">Mégse</button>
+  <button mat-button color="primary" (click)="onSave()">Mentés</button>
 </mat-dialog-actions>

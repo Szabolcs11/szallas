@@ -50,9 +50,6 @@ export class HomeComponent implements OnInit {
     minPrice: number | null;
     maxPrice: number | null;
   }) {
-    console.log(query, minPrice, maxPrice);
-    console.log(query != null);
-    console.log(minPrice != null && maxPrice != null);
     if (query != null && query.trim() !== '') {
       this.accommodationService
         .getAccommodationsByLocation(query)
@@ -65,7 +62,6 @@ export class HomeComponent implements OnInit {
       this.accommodationService
         .getAccommodationsByPriceRange(minPrice, maxPrice)
         .subscribe((data) => {
-          console.log(data);
           this.filteredAccommodations = data;
         });
       return;

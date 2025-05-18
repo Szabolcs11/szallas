@@ -39,7 +39,6 @@ export class AccommodationDetailComponent implements OnInit {
     this.accommodationService.getAccommodationById(id).subscribe((data) => {
       if (data) {
         this.accommodation = data;
-        console.log(data);
       } else {
         this.snackBar.open('Szállás nem található!', 'Bezárás', {
           duration: 3000,
