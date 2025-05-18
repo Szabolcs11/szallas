@@ -15,6 +15,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { Accommodation } from '../../models/accommodation';
 import { AccommodationService } from '../../services/accommodation.services';
 import { Router } from '@angular/router';
+import { NavbarComponent } from '../../components/navbar/navbar.component';
 
 @Component({
   selector: 'app-newaccommodation',
@@ -29,6 +30,7 @@ import { Router } from '@angular/router';
     MatCardModule,
     MatIconModule,
     ReactiveFormsModule,
+    NavbarComponent,
   ],
 })
 export class NewAccommodationComponent {
