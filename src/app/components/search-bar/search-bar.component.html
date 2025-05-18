@@ -5,6 +5,20 @@
     [(ngModel)]="searchText"
     name="searchText"
   />
+  <input
+    type="number"
+    placeholder="Min. ár (/éj)"
+    [(ngModel)]="minPrice"
+    name="minPrice"
+    min="0"
+  />
+  <input
+    type="number"
+    placeholder="Max. ár (/éj)"
+    [(ngModel)]="maxPrice"
+    name="maxPrice"
+    min="0"
+  />
   <button type="submit" matTooltip="Keresés">Keresés</button>
 </form>
 <mat-divider></mat-divider>

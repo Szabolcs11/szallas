@@ -11,11 +11,21 @@ import { MatTooltip } from '@angular/material/tooltip';
 })
 export class SearchBarComponent {
   searchText: string = '';
+  minPrice: number | null = null;
+  maxPrice: number | null = null;
 
-  @Output() search = new EventEmitter<string>();
+  @Output() search = new EventEmitter<{
+    query: string;
+    minPrice: number | null;
+    maxPrice: number | null;
+  }>();
 
   onSubmit(event: Event) {
     event.preventDefault();
-    this.search.emit(this.searchText.trim());
+    this.search.emit({
+      query: this.searchText.trim(),
+      minPrice: this.minPrice,
+      maxPrice: this.maxPrice,
+    });
   }
 }

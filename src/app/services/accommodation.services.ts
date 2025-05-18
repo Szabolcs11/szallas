@@ -73,6 +73,29 @@ export class AccommodationService {
     );
   }
 
+  getAccommodationsByPriceRange(
+    minPrice: number | null,
+    maxPrice: number | null
+  ): Observable<Accommodation[]> {
+    const itemCollection = collection(this.firestore, 'accommodation');
+    let q = query(itemCollection);
+    if (minPrice !== null) {
+      q = query(q, where('price', '>=', minPrice));
+    }
+    if (maxPrice !== null) {
+      q = query(q, where('price', '<=', maxPrice));
+    }
+    return from(getDocs(q)).pipe(
+      map((querySnapshot) => {
+        const accommodations: Accommodation[] = [];
+        querySnapshot.forEach((doc) => {
+          accommodations.push({ id: doc.id, ...doc.data() } as any);
+        });
+        return accommodations;
+      })
+    );
+  }
+
   createAccommodation(accommodation: Accommodation): Promise<any> {
     if (!accommodation) {
       this.snackBar.open('Szállás nem található!', 'Bezárás', {

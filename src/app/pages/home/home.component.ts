@@ -41,16 +41,39 @@ export class HomeComponent implements OnInit {
     });
   }
 
-  onSearch(query: string) {
+  onSearch({
+    query,
+    minPrice,
+    maxPrice,
+  }: {
+    query: string;
+    minPrice: number | null;
+    maxPrice: number | null;
+  }) {
+    console.log(query, minPrice, maxPrice);
+    console.log(query != null);
+    console.log(minPrice != null && maxPrice != null);
+    if (query != null && query.trim() !== '') {
+      this.accommodationService
+        .getAccommodationsByLocation(query)
+        .subscribe((data) => {
+          this.filteredAccommodations = data;
+        });
+      return;
+    }
+    if (minPrice != null && maxPrice != null) {
+      this.accommodationService
+        .getAccommodationsByPriceRange(minPrice, maxPrice)
+        .subscribe((data) => {
+          console.log(data);
+          this.filteredAccommodations = data;
+        });
+      return;
+    }
     if (!query) {
       this.filteredAccommodations = this.accommodations;
       return;
     }
-    this.accommodationService
-      .getAccommodationsByLocation(query)
-      .subscribe((data) => {
-        this.filteredAccommodations = data;
-      });
   }
 
   onReserve(id: number) {
